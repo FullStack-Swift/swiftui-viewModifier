@@ -16,7 +16,9 @@ private struct PreviewFrameModifier: ViewModifier {
           let size: String = "(w: \(rounded(geometry.size.width)), h: \(rounded(geometry.size.height)))"
           ZStack(alignment: .bottom) {
             if isPresentedBackground {
+#if iOS
               Color(.systemBackground)
+#endif
             }
             Rectangle()
               .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [5]))
@@ -24,7 +26,9 @@ private struct PreviewFrameModifier: ViewModifier {
             Text("\(origin) | \(size)")
               .fontWeight(.bold)
               .foregroundColor(Color.red)
+#if iOS
               .font(.caption2)
+#endif
               .zIndex(10000)
               .onTapGesture {
                 isPresentedBackground.toggle()
