@@ -1,10 +1,10 @@
 import SwiftUI
 
-private struct PreviewFrameModifier: ViewModifier {
+public struct PreviewFrameViewModifier: ViewModifier {
   
   @State private var isPresentedBackground: Bool = false
   
-  func body(content: Content) -> some View {
+  public func body(content: Content) -> some View {
 #if !DEBUG
     return content
 #endif
@@ -29,7 +29,7 @@ private struct PreviewFrameModifier: ViewModifier {
 #if iOS
               .font(.caption2)
 #endif
-              .zIndex(10000)
+              .zIndex(9999)
               .onTapGesture {
                 isPresentedBackground.toggle()
               }
@@ -45,6 +45,6 @@ private struct PreviewFrameModifier: ViewModifier {
 
 public extension View {
   func debugFrame() -> some View {
-    return modifier(PreviewFrameModifier())
+    return modifier(PreviewFrameViewModifier())
   }
 }
