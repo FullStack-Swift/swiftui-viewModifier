@@ -18,6 +18,7 @@ public struct OnFirstAppearViewModifier: ViewModifier {
         action?()
       }
     }
+      .onDisappear()
   }
 }
 
