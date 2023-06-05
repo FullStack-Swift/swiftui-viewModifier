@@ -1,6 +1,6 @@
 import SwiftUI
 
-fileprivate final class OnLastAppearViewModel: ObservableObject {
+fileprivate final class OnLastDisappearViewModel: ObservableObject {
 
   fileprivate let action: (() -> Void)?
 
@@ -14,13 +14,13 @@ fileprivate final class OnLastAppearViewModel: ObservableObject {
 
 }
 
-public struct OnLastAppearViewModifier: ViewModifier {
+public struct OnLastDisappearViewModifier: ViewModifier {
 
   @StateObject
-  private var viewModel: OnLastAppearViewModel
+  private var viewModel: OnLastDisappearViewModel
 
   public init(action: (() -> Void)? = nil) {
-    _viewModel = StateObject(wrappedValue: OnLastAppearViewModel(action: action))
+    _viewModel = StateObject(wrappedValue: OnLastDisappearViewModel(action: action))
   }
 
   public func body(content: Content) -> some View {
@@ -31,7 +31,7 @@ public struct OnLastAppearViewModifier: ViewModifier {
 }
 
 extension View {
-  public func onLastAppear(perform action: (() -> Void)? = nil) -> some View {
-    modifier(OnLastAppearViewModifier(action: action))
+  public func onLastDisappear(perform action: (() -> Void)? = nil) -> some View {
+    modifier(OnLastDisappearViewModifier(action: action))
   }
 }
