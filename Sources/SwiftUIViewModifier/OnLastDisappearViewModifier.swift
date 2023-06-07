@@ -2,16 +2,17 @@ import SwiftUI
 
 fileprivate final class OnLastDisappearViewModel: ObservableObject {
 
-  fileprivate let action: (() -> Void)?
+  fileprivate var action: (() -> Void)?
 
   fileprivate init(action: (() -> Void)? = nil) {
     self.action = action
   }
 
   deinit {
-    action?()
+    let clone = action
+    action = nil
+    clone?()
   }
-
 }
 
 public struct OnLastDisappearViewModifier: ViewModifier {
