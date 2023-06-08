@@ -11,7 +11,10 @@ fileprivate final class OnLastDisappearViewModel: ObservableObject {
   deinit {
     let clone = action
     action = nil
-    clone?()
+    Task.init { @MainActor in
+      try await Task.sleep(seconds:0.03)
+      clone?()
+    }
   }
 }
 
@@ -34,5 +37,12 @@ public struct OnLastDisappearViewModifier: ViewModifier {
 extension View {
   public func onLastDisappear(perform action: (() -> Void)? = nil) -> some View {
     modifier(OnLastDisappearViewModifier(action: action))
+  }
+}
+
+extension Task where Success == Never, Failure == Never {
+  static func sleep(seconds: Double) async throws {
+    let duration = UInt64(seconds * 1_000_000_000)
+    try await Task.sleep(nanoseconds: duration)
   }
 }
